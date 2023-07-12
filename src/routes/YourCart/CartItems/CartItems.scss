@@ -10,9 +10,10 @@
         gap: 20px;
 
         @include breakpoint("sm-max") {
-            grid-template-columns: repeat(1 , 1fr);
+            grid-template-columns: repeat(1, 1fr);
             gap: 20px;
         }
+
         .remove-icon {
             padding: 20px 0 0 0;
 
@@ -21,20 +22,34 @@
                 cursor: pointer;
             }
         }
+
         .two-text {
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 16px;
-            padding: 0 0 20px 0;
+            padding: 0 0 10px 0;
+
             p:last-child {
                 white-space: nowrap;
             }
+
             p {
                 font-size: 16px;
                 line-height: 24px;
                 color: var(--theme-black-text-color);
                 font-weight: 600;
+            }
+        }
+
+        .stock-data-wrapper {
+            padding: 0 0 10px 0;
+            .in-stock-wrapper {
+                color: #007600;
+            }
+
+            .few-stock-wrapper {
+                color: #777;
             }
         }
 

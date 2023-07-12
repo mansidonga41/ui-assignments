@@ -3,8 +3,10 @@ import CartItems from "./CartItems";
 import "./YourCart.scss";
 import { cartData, cartTotalPrice } from "../../jotai/addToCart";
 import { useAtom } from "jotai";
+import { useNavigate } from "react-router-dom";
 
 export default function YourCart() {
+  const navigate = useNavigate();
   const [cartItem, setCartItem] = useAtom(cartData);
   const [cartItemsTotalPrice, setCartItemsTotalPrice] = useAtom(cartTotalPrice);
 
@@ -21,6 +23,15 @@ export default function YourCart() {
     <div>
       <div className="your-cart-all-details-alignment">
         <div className="container">
+          <div
+            className="go-to-home-page"
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            <i class="fa-solid fa-chevron-left"></i>
+            <span>Go To Home Page</span>
+          </div>
           <div className="title">
             <h1>Your Cart</h1>
           </div>
@@ -31,7 +42,13 @@ export default function YourCart() {
             <div className="grid-items">
               {cartItem.length == 0 ? (
                 <>
-                  <span>No Items in cart</span>
+                  <span className="empty-cart-wrapper">
+                    Your cart is empty.&nbsp;
+                    <a href="/" className="click-here-link">
+                      Click here
+                    </a>
+                    &nbsp;to continue shopping.
+                  </span>
                 </>
               ) : (
                 <>
@@ -47,6 +64,20 @@ export default function YourCart() {
                   <span>$ {cartItemsTotalPrice}</span>
                 </p>
               </div>
+              {cartItem.length == 0 ? (
+                <></>
+              ) : (
+                <>
+                  <div
+                    className="order-summary-button-right-alignment"
+                    onClick={() => {
+                      navigate("/order-summary");
+                    }}
+                  >
+                    <button>Place Order</button>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>

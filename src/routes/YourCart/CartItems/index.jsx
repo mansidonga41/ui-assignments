@@ -21,12 +21,21 @@ export default function CartItems(props) {
       <div className="cart-items-design">
         <div className="sub-grid">
           <div className="img">
-            <img src="https://ideen-images.s3-ap-south-1.amazonaws.com/1654781391491.jpeg" />
+            <img src={props?.item?.thumbnail} />
           </div>
           <div>
             <div className="two-text">
               <p>{props?.item?.title}</p>
               <p>${props?.item?.totalPrice}</p>
+            </div>
+            <div className="stock-data-wrapper">
+              <p >
+                {props.item?.stock > 3 ? (
+                  <span className="in-stock-wrapper">In stock</span>
+                ) : (
+                  <span className="few-stock-wrapper">Hurry! Only few items left</span>
+                )}
+              </p>
             </div>
             <ProductCounter
               quantity={props.item?.quantity}

@@ -3,20 +3,37 @@ import ProductCounter from "../ProductCounter";
 import ProductDetails from "../ProductDetails";
 import "./SingleProduct.scss";
 import { useAtom } from "jotai";
-import { cartData } from "../../jotai/addToCart";
+import { cartData, cartQuantity } from "../../jotai/addToCart";
 import { toast } from "react-hot-toast";
 
 export default function SingleProduct(props) {
   const { toogle, setToogle } = props;
   const [cartItem, setCartItem] = useAtom(cartData);
+  const [totalCartQuantity, setTotalCartQuantity] = useAtom(cartQuantity);
 
   const onAddCart = (e, product) => {
     e.stopPropagation();
     let cartData = [...cartItem];
+    let filteredData = cartData.findIndex((c) => c.id == product.id);
 
-    let filteredData = cartData.filter((c) => c.id == product.id);
-    if (filteredData.length == 0) {
+    if (filteredData !== -1) {
+      cartData[filteredData].quantity += 1;
+      setCartItem(cartData);
+
+      const totalQuantity = cartData.reduce(
+        (sum, product) => sum + product.quantity,
+        0
+      );
+      setTotalCartQuantity(totalQuantity);
+      toast.success("Added to cart!");
+    } else {
       setCartItem([...cartItem, product]);
+
+      const totalQuantity = cartData.reduce(
+        (sum, product) => sum + product.quantity,
+        0
+      );
+      setTotalCartQuantity(totalQuantity);
       toast.success("Added to cart!");
     }
   };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Topbar from "../Topbar";
 import "./header.scss";
 import CartIcon from "../../../assets/icons/cart.png";
@@ -6,6 +6,7 @@ import SearchIcon from "../../../assets/icons/search.svg";
 import { useAtom } from "jotai";
 import {
   cartData,
+  cartQuantity,
   originalProductsData,
   productsData,
 } from "../../../jotai/addToCart";
@@ -15,6 +16,7 @@ export default function Header() {
   const [cartItem, setCartItem] = useAtom(cartData);
   const [products, setProducts] = useAtom(productsData);
   const [originalProducts, setOriginalProducts] = useAtom(originalProductsData);
+  const [totalCartQuantity, setTotalCartQuantity] = useAtom(cartQuantity);
   const navigate = useNavigate();
 
   const searchProducts = (query) => {
@@ -29,6 +31,14 @@ export default function Header() {
       setProducts(originalProducts);
     }
   };
+
+  useEffect(() => {
+    const totalQuantity = cartItem.reduce(
+      (sum, product) => sum + product.quantity,
+      0
+    );
+    setTotalCartQuantity(totalQuantity);
+  }, [cartItem]);
 
   return (
     <>
@@ -47,7 +57,7 @@ export default function Header() {
             <div className="search">
               <input
                 type="text"
-                placeholder="Search products"
+                placeholder="Search for products"
                 onInput={(e) => {
                   searchProducts(e.target.value);
                 }}
@@ -65,7 +75,7 @@ export default function Header() {
               >
                 <div className="relative-div">
                   <img src={CartIcon} alt="CartIcon" />
-                  <div className="edge">{cartItem?.length}</div>
+                  <div className="edge">{totalCartQuantity}</div>
                 </div>
                 <p>Shopping Cart</p>
               </div>

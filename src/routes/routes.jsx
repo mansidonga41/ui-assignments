@@ -8,6 +8,7 @@ import {
 import DefaultLayout from "../components/defaultLayout/defaultLayout";
 import { Home } from "./Home";
 import YourCart from "./YourCart";
+import OrderSummary from "./OrderSummary";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,14 @@ const router = createBrowserRouter([
     element: (
       <DefaultLayout>
         <YourCart />
+      </DefaultLayout>
+    ),
+  },
+  {
+    path: "/order-summary",
+    element: (
+      <DefaultLayout>
+        <OrderSummary />
       </DefaultLayout>
     ),
   },

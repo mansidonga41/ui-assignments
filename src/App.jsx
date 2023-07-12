@@ -18,7 +18,7 @@ function App() {
         toastOptions={{
           // Define default options
           className: "",
-          duration: 5000,
+          duration: 2000,
           style: {
             background: "#363636",
             color: "#fff",
@@ -26,7 +26,7 @@ function App() {
 
           // Default options for specific types
           success: {
-            duration: 3000,
+            duration: 2000,
             theme: {
               primary: "green",
               secondary: "black",

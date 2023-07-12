@@ -1,9 +1,11 @@
 import React from "react";
 import "./ProductCounter.scss";
 import { useAtom } from "jotai";
-import { cartData, cartTotalPrice } from "../../jotai/addToCart";
+import { cartData, cartQuantity, cartTotalPrice } from "../../jotai/addToCart";
+
 export default function ProductCounter(props) {
   const [cartItem, setCartItem] = useAtom(cartData);
+  const [totalCartQuantity, setTotalCartQuantity] = useAtom(cartQuantity);
   const [cartItemsTotalPrice, setCartItemsTotalPrice] = useAtom(cartTotalPrice);
 
   const onIncrement = (e, index) => {
@@ -25,6 +27,7 @@ export default function ProductCounter(props) {
 
       setCartItemsTotalPrice(updatedCartItem[index].totalPrice);
       setCartItem(updatedCartItem);
+      setTotalCartQuantity(updatedCartItem[index].quantity);
     }
   };
 
@@ -47,6 +50,7 @@ export default function ProductCounter(props) {
 
         setCartItemsTotalPrice(updatedCartItem[index].totalPrice);
         setCartItem(updatedCartItem);
+        setTotalCartQuantity(updatedCartItem[index].quantity);
       }
     }
   };
