@@ -1,0 +1,19 @@
+@import '../../../../styles/mixins/index.scss';
+
+.topbar {
+    padding: 7px 0;
+    border-bottom: 1px solid var(--theme-border-color);
+
+    span {
+        display: block;
+        font-size: 14px;
+        line-height: 20px;
+        color: var(--theme-gray-500-text-color);
+        text-align: center;
+        font-weight: 500;
+
+        @include breakpoint("sm-max") {
+            font-size: 12px;
+        }
+    }
+}

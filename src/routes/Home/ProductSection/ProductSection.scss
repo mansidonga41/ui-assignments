@@ -1,0 +1,33 @@
+@import '../../../../styles/mixins/index.scss';
+
+
+.product-section-all-contnet-alignment {
+    padding: 60px 0;
+    .title {
+        padding: 0 0 40px 0;
+        h1 {
+            font-size: 32px;
+            color: var(--theme-black-500-text-color);
+            font-weight: 500;
+            @include breakpoint("sm-max") {
+                font-size: 24px;
+                line-height: 32px;
+            }
+        }
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(4 , 1fr);
+        gap: 40px;
+
+        @include breakpoint("md-max") {
+            grid-template-columns: repeat(3 , 1fr);
+            gap: 20px;
+        }
+        @include breakpoint("sm-max") {
+            grid-template-columns: repeat(1 , 1fr);
+            padding: 0 20px;
+        }
+    }
+}
